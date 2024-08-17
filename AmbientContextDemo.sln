@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmbientContextDemo", "AmbientContextDemo\AmbientContextDemo.csproj", "{A8938751-9998-463F-A8D8-8981FC91CDBF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8938751-9998-463F-A8D8-8981FC91CDBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8938751-9998-463F-A8D8-8981FC91CDBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8938751-9998-463F-A8D8-8981FC91CDBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8938751-9998-463F-A8D8-8981FC91CDBF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
