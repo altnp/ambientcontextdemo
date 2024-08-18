@@ -28,6 +28,9 @@ public class AmbientContext
 
     public override string ToString()
     {
+        if (State.Keys.Count == 0)
+            return "empty";
+
         var sb = new StringBuilder();
         foreach (var kvp in State)
         {

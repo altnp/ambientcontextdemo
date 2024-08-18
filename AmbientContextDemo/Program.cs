@@ -1,15 +1,16 @@
 ﻿using AmbientContextDemo;
 
-// AmbientContextAccessor.Current = new AmbientContext().ForCarrier(1);
-//
-// await new Logic().DoSomething(1);
-// await new Logic().DoSomethingElse(1);
-// //Persists across async
-// var current = AmbientContextAccessor.Current;
+var initial = AmbientContextAccessor.Current;
+AmbientContextAccessor.Current = new AmbientContext().ForCarrier(0);
+//Persists across async
+await new Logic().DoSomething(0);
+await new Logic().DoSomethingElse(0);
+var current = AmbientContextAccessor.Current;
+Console.WriteLine(initial);
+Console.WriteLine(current);
 
-Thread[] threads = new Thread[3];
-
-for (int i = 0; i < threads.Length; i++)
+var threads = new Thread[3];
+for (var i = 0; i < threads.Length; i++)
 {
     threads[i] = new Thread(async () =>
         {
@@ -17,21 +18,24 @@ for (int i = 0; i < threads.Length; i++)
 
             AmbientContextAccessor.Current.ForCarrier(Thread.CurrentThread.ManagedThreadId);
 
-            await new Logic().DoSomething(1);
-            await new Logic().DoSomethingElse(1);
+            await new Logic().DoSomething(Thread.CurrentThread.ManagedThreadId);
+            await new Logic().DoSomethingElse(Thread.CurrentThread.ManagedThreadId);
 
             var current = AmbientContextAccessor.Current;
             current.Serialize();
             Console.WriteLine(current);
         }
     );
+
     threads[i].Name = $"Thread-{i + 1}";
-    threads[i].Start();
+    threads[i].UnsafeStart(); //don't capture execution context
 }
 
-foreach (Thread thread in threads)
+foreach (var thread in threads)
 {
     thread.Join();
 }
+
+Console.WriteLine(AmbientContextAccessor.Current);
 
 Console.ReadKey();
